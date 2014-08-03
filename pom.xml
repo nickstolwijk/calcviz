@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.massfords</groupId>
+    <artifactId>calcviz</artifactId>
+    <version>2.0-SNAPSHOT</version>
+
+    <description>
+        Simple project to illustrate the application of the jaxb-visitor plugin.
+        The schema defines a number of operations that can be formed into an
+        expression graph. The CalculatorVisitor visits the nodes of the graph
+        and evaluates each of the operations.
+    </description>
+
+    <developers>
+        <developer>
+            <id>mark</id>
+            <name>Mark Ford</name>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+            <email>mark@massfords.com</email>
+            <url>http://code.massfords.com</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/massfords/calcviz</url>
+        <connection>scm:git:git://github.com/massfords/calcviz.git</connection>
+        <developerConnection>scm:git:git@github.com:massfords/calcviz.git</developerConnection>
+    </scm>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.7.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <strict>false</strict>
+                    <extension>true</extension>
+
+                    <schemaDirectory>
+                        ${basedir}/src/main/resources
+                    </schemaDirectory>
+
+                    <schemaIncludes>
+                        <value>calcviz.xsd</value>
+                    </schemaIncludes>
+
+                    <args>
+                        <arg>-Xvisitor</arg>
+                        <arg>-Xfluent-api</arg>
+                        <arg>-Xvalue-constructor</arg>
+                    </args>
+
+                    <plugins>
+                        <plugin>
+                            <groupId>com.massfords</groupId>
+                            <artifactId>jaxb-visitor</artifactId>
+                            <version>2.0</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-fluent-api</artifactId>
+                            <version>3.0</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-value-constructor</artifactId>
+                            <version>3.0</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.jvnet.jaxb2_commons</groupId>
+                            <artifactId>jaxb2-basics</artifactId>
+                            <version>0.6.2</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>jdoc</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
