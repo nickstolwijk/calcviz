@@ -35,8 +35,18 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
+            <version>4.13</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
 
@@ -53,16 +63,16 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.12.3</version>
+                <artifactId>maven-jaxb22-plugin</artifactId>
+                <version>0.14.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -75,7 +85,7 @@
                     <extension>true</extension>
 
                     <schemaDirectory>
-                        ${basedir}/src/main/resources
+                        ${basedir}/src/main/xsd
                     </schemaDirectory>
 
                     <schemaIncludes>
@@ -92,7 +102,7 @@
                         <plugin>
                             <groupId>com.massfords</groupId>
                             <artifactId>jaxb-visitor</artifactId>
-                            <version>2.2-SNAPSHOT</version>
+                            <version>2.8</version>
                         </plugin>
                         <plugin>
                             <groupId>org.jvnet.jaxb2_commons</groupId>
@@ -107,7 +117,7 @@
                         <plugin>
                             <groupId>org.jvnet.jaxb2_commons</groupId>
                             <artifactId>jaxb2-basics</artifactId>
-                            <version>0.6.2</version>
+                            <version>0.12.0</version>
                         </plugin>
                     </plugins>
                 </configuration>
